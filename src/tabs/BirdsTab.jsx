@@ -73,146 +73,184 @@ export default function BirdsTab() {
   }
 
   return (
-    <div>
-      {/* Search */}
-      <ZipSearch
-        color={COLOR}
-        loading={loading}
-        onSearch={params => { setSearchParams(params); setActiveBird(null); }}
-      />
+  <div>
+    <ZipSearch
+      color={COLOR}
+      loading={loading}
+      onSearch={params => { setSearchParams(params); setActiveBird(null); }}
+    />
 
-      {/* View toggle */}
-      <div style={{ display: "flex", gap: 8, marginBottom: 14 }}>
-        {[["nearby", "📍 Nearby Sightings"], ["library", "📚 Browse Library"]].map(([mode, label]) => (
-          <button key={mode} onClick={() => { setViewMode(mode); setActiveBird(null); }}
-            style={{ flex: 1, padding: "8px 12px", borderRadius: 20, border: `2px solid ${viewMode === mode ? COLOR : "#d0c8b8"}`, background: viewMode === mode ? COLOR : "#faf8f3", color: viewMode === mode ? "#fff" : "#3a3028", cursor: "pointer", fontWeight: viewMode === mode ? 700 : 400, fontSize: 12 }}>
-            {label}
-          </button>
-        ))}
-      </div>
+    {/* View toggle */}
+    <div style={{ display: "flex", gap: 8, marginBottom: 14 }}>
+      {[["nearby", "📍 Nearby Sightings"], ["library", "📚 Browse Library"]].map(([mode, label]) => (
+        <button key={mode} onClick={() => { setViewMode(mode); setActiveBird(null); }}
+          style={{ flex: 1, padding: "8px 12px", borderRadius: 20, border: `2px solid ${viewMode === mode ? COLOR : "#d0c8b8"}`, background: viewMode === mode ? COLOR : "#faf8f3", color: viewMode === mode ? "#fff" : "#3a3028", cursor: "pointer", fontWeight: viewMode === mode ? 700 : 400, fontSize: 12 }}>
+          {label}
+        </button>
+      ))}
+    </div>
 
-      {/* NEARBY VIEW */}
-      {viewMode === "nearby" && (
-        <div>
-          {!EBIRD_KEY && (
-            <div style={{ background: "#fff8e8", border: "1.5px solid #c07a2a", borderRadius: 10, padding: "12px 16px", fontSize: 12, color: "#7a5a00", marginBottom: 12 }}>
-              ⚠️ Add <strong>REACT_APP_EBIRD_KEY</strong> on Vercel to enable live nearby sightings.
+    {/* NEARBY VIEW */}
+    {viewMode === "nearby" && (
+      <div>
+        {!EBIRD_KEY && (
+          <div style={{ background: "#fff8e8", border: "1.5px solid #c07a2a", borderRadius: 10, padding: "12px 16px", fontSize: 12, color: "#7a5a00", marginBottom: 12 }}>
+            ⚠️ Add <strong>REACT_APP_EBIRD_KEY</strong> on Vercel to enable live nearby sightings.
+          </div>
+        )}
+
+        {loading && (
+          <div style={{ textAlign: "center", padding: 30, color: "#8a7a6a", fontSize: 13 }}>
+            Searching for birds near {searchParams.city}…
+          </div>
+        )}
+
+        {fetched && !loading && uniqueSightings.length === 0 && (
+          <div style={{ textAlign: "center", padding: 30, color: "#8a7a6a", fontSize: 13 }}>
+            No sightings found in the last 14 days within {searchParams.radius} miles of {searchParams.city}.
+          </div>
+        )}
+
+        {fetched && uniqueSightings.length > 0 && (
+          <div>
+            <div style={{ fontSize: 12, color: "#6a7a6a", marginBottom: 14 }}>
+              <strong>{uniqueSightings.length} species</strong> spotted within {searchParams.radius} mi of {searchParams.city} in the last 14 days
+              · <span style={{ color: COLOR }}>{inLibrary.length} in your library</span>
+              · <span style={{ color: "#c07a2a" }}>{notInLibrary.length} not yet in library</span>
             </div>
-          )}
 
-          {loading && (
-            <div style={{ textAlign: "center", padding: 30, color: "#8a7a6a", fontSize: 13 }}>
-              Searching for birds near {searchParams.city}…
-            </div>
-          )}
-
-          {fetched && !loading && uniqueSightings.length === 0 && (
-            <div style={{ textAlign: "center", padding: 30, color: "#8a7a6a", fontSize: 13 }}>
-              No sightings found in the last 14 days within {searchParams.radius} miles of {searchParams.city}.
-            </div>
-          )}
-
-          {fetched && uniqueSightings.length > 0 && (
-            <div>
-              <div style={{ fontSize: 12, color: "#6a7a6a", marginBottom: 14 }}>
-                <strong>{uniqueSightings.length} species</strong> spotted within {searchParams.radius} mi of {searchParams.city} in the last 14 days
-                · <span style={{ color: COLOR }}>{inLibrary.length} in your library</span>
-                · <span style={{ color: "#c07a2a" }}>{notInLibrary.length} not yet in library</span>
-              </div>
-
-              {/* In library */}
-              {inLibrary.length > 0 && (
-                <div style={{ marginBottom: 20 }}>
-                  <div style={{ fontSize: 10, letterSpacing: 3, textTransform: "uppercase", color: "#8a7a6a", marginBottom: 10 }}>
-                    In Your Library ({inLibrary.length})
-                  </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(130px,1fr))", gap: 8 }}>
-                    {inLibrary.map(s => {
-                      const lib = getBirdFromLibraryBySighting(s);
-                      const photoKey = lib ? Object.keys(birdLibrary).find(k => birdLibrary[k].commonName?.toLowerCase() === s.comName?.toLowerCase()) : null;
-                      const photos = photoKey ? (birdLibrary[photoKey]?.photos || []) : [];
-                      const bird = { name: s.comName, sciName: s.sciName, speciesCode: s.speciesCode };
-                      return (
-                        <BirdGridCard key={s.speciesCode} bird={bird} photos={photos} color={COLOR}
-                          selected={activeBird?.speciesCode === s.speciesCode}
-                          onClick={() => setActiveBird(activeBird?.speciesCode === s.speciesCode ? null : { ...bird, photos })}
-                        />
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {/* Not in library */}
-              {notInLibrary.length > 0 && (
-                <div>
-                  <div style={{ fontSize: 10, letterSpacing: 3, textTransform: "uppercase", color: "#8a7a6a", marginBottom: 10 }}>
-                    Not Yet in Library — flag to add ({notInLibrary.length})
-                  </div>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                    {notInLibrary.map(s => (
-                      <button key={s.speciesCode}
-                        onClick={() => setActiveBird(activeBird?.speciesCode === s.speciesCode ? null : { name: s.comName, sciName: s.sciName, speciesCode: s.speciesCode, photos: [] })}
-                        style={{ fontSize: 11, padding: "5px 12px", borderRadius: 20, border: `1.5px solid ${activeBird?.speciesCode === s.speciesCode ? "#c07a2a" : "#e0d8cc"}`, background: activeBird?.speciesCode === s.speciesCode ? "#c07a2a15" : "#faf8f3", color: "#3a3028", cursor: "pointer", fontWeight: 600 }}>
-                        🐦 {s.comName}
-                        <span style={{ fontSize: 9, background: "#f0c040", color: "#7a5a00", borderRadius: 8, padding: "1px 5px", marginLeft: 5, fontWeight: 700 }}>+ Add</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Detail panel */}
-              {activeBird && (
-                <div style={{ marginTop: 14 }}>
+            {/* DETAIL CARD — top, shown when a bird is selected */}
+            {activeBird && (() => {
+              // Get all sightings for this species to build hotspot list
+              const speciesSightings = sightings.filter(
+                s => s.comName?.toLowerCase() === activeBird.name?.toLowerCase()
+              );
+              const daysAgo = dateStr => {
+                const diff = Math.floor((Date.now() - new Date(dateStr)) / 86400000);
+                if (diff === 0) return "today";
+                if (diff === 1) return "yesterday";
+                return `${diff}d ago`;
+              };
+              return (
+                <div style={{ marginBottom: 16 }}>
                   <BirdDetailPanel
                     bird={activeBird}
                     photos={activeBird.photos || []}
                     color={COLOR}
                     inLibrary={libraryNames.has(activeBird.name?.toLowerCase())}
                   />
+                  {speciesSightings.length > 0 && (
+                    <div style={{ marginTop: 10, background: "#fff", borderRadius: 12, border: `1.5px solid ${COLOR}30`, padding: "14px 16px" }}>
+                      <div style={{ fontSize: 10, letterSpacing: 3, textTransform: "uppercase", color: "#8a7a6a", marginBottom: 10 }}>
+                        Where it was spotted nearby ({speciesSightings.length} location{speciesSightings.length !== 1 ? "s" : ""})
+                      </div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                        {speciesSightings.map((s, i) => (
+                          <a key={i}
+                            href={`https://ebird.org/hotspot/${s.locId}`}
+                            target="_blank" rel="noopener noreferrer"
+                            style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", borderRadius: 8, background: `${COLOR}08`, border: `1px solid ${COLOR}25`, textDecoration: "none", gap: 10 }}>
+                            <div>
+                              <div style={{ fontSize: 12, fontWeight: 700, color: "#1a2a1a" }}>{s.locName}</div>
+                              <div style={{ fontSize: 10, color: "#6a7a6a", marginTop: 2 }}>
+                                {s.lat && s.lng ? `${s.lat.toFixed(3)}, ${s.lng.toFixed(3)}` : ""}
+                              </div>
+                            </div>
+                            <div style={{ textAlign: "right", flexShrink: 0 }}>
+                              {s.howMany && <div style={{ fontSize: 12, fontWeight: 700, color: COLOR }}>×{s.howMany}</div>}
+                              <div style={{ fontSize: 10, color: "#8a7a6a" }}>{daysAgo(s.obsDt)}</div>
+                            </div>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          )}
-        </div>
-      )}
+              );
+            })()}
 
-      {/* LIBRARY VIEW */}
-      {viewMode === "library" && (
-        <div>
-          <input
-            value={searchFilter}
-            onChange={e => setSearchFilter(e.target.value)}
-            placeholder="Search by name or scientific name…"
-            style={{ width: "100%", padding: "9px 14px", borderRadius: 10, border: `1.5px solid ${COLOR}40`, fontSize: 13, marginBottom: 14, boxSizing: "border-box" }}
-          />
-          {libraryEntries.length === 0 ? (
-            <div style={{ textAlign: "center", padding: 30, color: "#8a7a6a", fontSize: 13 }}>No birds match your search.</div>
-          ) : (
-            <div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(130px,1fr))", gap: 8, marginBottom: 14 }}>
-                {libraryEntries.map(([key, val]) => {
-                  const bird = { name: val.commonName, sciName: val.sciName };
-                  return (
-                    <BirdGridCard key={key} bird={bird} photos={val.photos || []} color={COLOR}
-                      selected={activeBird?.name === val.commonName}
-                      onClick={() => setActiveBird(activeBird?.name === val.commonName ? null : { ...bird, note: val.note })}
-                    />
-                  );
-                })}
+            {/* In library */}
+            {inLibrary.length > 0 && (
+              <div style={{ marginBottom: 20 }}>
+                <div style={{ fontSize: 10, letterSpacing: 3, textTransform: "uppercase", color: "#8a7a6a", marginBottom: 10 }}>
+                  In Your Library ({inLibrary.length})
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(130px,1fr))", gap: 8 }}>
+                  {inLibrary.map(s => {
+                    const photoKey = Object.keys(birdLibrary).find(k => birdLibrary[k].commonName?.toLowerCase() === s.comName?.toLowerCase());
+                    const photos = photoKey ? (birdLibrary[photoKey]?.photos || []) : [];
+                    const bird = { name: s.comName, sciName: s.sciName, speciesCode: s.speciesCode };
+                    return (
+                      <BirdGridCard key={s.speciesCode} bird={bird} photos={photos} color={COLOR}
+                        selected={activeBird?.speciesCode === s.speciesCode}
+                        onClick={() => setActiveBird(activeBird?.speciesCode === s.speciesCode ? null : { ...bird, photos })}
+                      />
+                    );
+                  })}
+                </div>
               </div>
-              {activeBird && (
+            )}
+
+            {/* Not in library */}
+            {notInLibrary.length > 0 && (
+              <div>
+                <div style={{ fontSize: 10, letterSpacing: 3, textTransform: "uppercase", color: "#8a7a6a", marginBottom: 10 }}>
+                  Not Yet in Library — flag to add ({notInLibrary.length})
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                  {notInLibrary.map(s => (
+                    <button key={s.speciesCode}
+                      onClick={() => setActiveBird(activeBird?.speciesCode === s.speciesCode ? null : { name: s.comName, sciName: s.sciName, speciesCode: s.speciesCode, photos: [] })}
+                      style={{ fontSize: 11, padding: "5px 12px", borderRadius: 20, border: `1.5px solid ${activeBird?.speciesCode === s.speciesCode ? "#c07a2a" : "#e0d8cc"}`, background: activeBird?.speciesCode === s.speciesCode ? "#c07a2a15" : "#faf8f3", color: "#3a3028", cursor: "pointer", fontWeight: 600 }}>
+                      🐦 {s.comName}
+                      <span style={{ fontSize: 9, background: "#f0c040", color: "#7a5a00", borderRadius: 8, padding: "1px 5px", marginLeft: 5, fontWeight: 700 }}>+ Add</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    )}
+
+    {/* LIBRARY VIEW */}
+    {viewMode === "library" && (
+      <div>
+        <input
+          value={searchFilter}
+          onChange={e => setSearchFilter(e.target.value)}
+          placeholder="Search by name or scientific name…"
+          style={{ width: "100%", padding: "9px 14px", borderRadius: 10, border: `1.5px solid ${COLOR}40`, fontSize: 13, marginBottom: 14, boxSizing: "border-box" }}
+        />
+        {libraryEntries.length === 0 ? (
+          <div style={{ textAlign: "center", padding: 30, color: "#8a7a6a", fontSize: 13 }}>No birds match your search.</div>
+        ) : (
+          <div>
+            {activeBird && (
+              <div style={{ marginBottom: 14 }}>
                 <BirdDetailPanel
                   bird={activeBird}
                   photos={birdLibrary[Object.keys(birdLibrary).find(k => birdLibrary[k].commonName === activeBird.name)]?.photos || []}
                   color={COLOR}
                 />
-              )}
+              </div>
+            )}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(130px,1fr))", gap: 8 }}>
+              {libraryEntries.map(([key, val]) => {
+                const bird = { name: val.commonName, sciName: val.sciName };
+                return (
+                  <BirdGridCard key={key} bird={bird} photos={val.photos || []} color={COLOR}
+                    selected={activeBird?.name === val.commonName}
+                    onClick={() => setActiveBird(activeBird?.name === val.commonName ? null : { ...bird, note: val.note })}
+                  />
+                );
+              })}
             </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
+          </div>
+        )}
+      </div>
+    )}
+  </div>
+);
 }
