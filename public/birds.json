@@ -10,7 +10,7 @@
       "Label conventions: Adult Male, Adult Female, Juvenile, Immature, Breeding Adult, Non-breeding Adult, In Flight"
     ]
   },
-  "great-blue-heron": { "commonName": "Great Blue Heron", "sciName": "Ardea herodias", "photos": [{"label": "Adult", "URL": "/bird-photos/great-blue-heron-adults.jpeg", "credit": "Audubon"}] },
+  "great-blue-heron": { "commonName": "Great Blue Heron", "sciName": "Ardea herodias", "photos": [{"label": "Adult", "url": "/bird-photos/great-blue-heron-adults.jpeg", "credit": "Audubon"}] },
   "black-necked-stilt": { "commonName": "Black-necked Stilt", "sciName": "Himantopus mexicanus", "photos": [] },
   "american-avocet": { "commonName": "American Avocet", "sciName": "Recurvirostra americana", "photos": [] },
   "snowy-egret": { "commonName": "Snowy Egret", "sciName": "Egretta thula", "photos": [{"label": "Adult", "URL": "/bird-photos/snowy-egret-adult.jpeg", "credit": "Audubon"}] },
