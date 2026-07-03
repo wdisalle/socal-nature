@@ -26,7 +26,7 @@
   "california-gnatcatcher": { "commonName": "California Gnatcatcher", "sciName": "Polioptila californica", "photos": [{"label": "Adult", "url": "/bird-photos/california-gnatcatcher-adult.jpeg", "credit": "Audubon"}] },
   "peregrine-falcon": { "commonName": "Peregrine Falcon", "sciName": "Falco peregrinus", "photos": [] },
   "brown-pelican": { "commonName": "Brown Pelican", "sciName": "Pelecanus occidentalis", "photos": [{"label": "Adult", "url": "/bird-photos/brown-pelican-adult.jpeg", "credit": "Audubon"}] },
-  "nuttalls-woodpecker": { "commonName": "Nuttall's Woodpecker", "sciName": "Dryobates nuttallii", "photos": [{"label": "Adult", "url": "/bird-photos/nuttals-woodpecker-adult-male.jpeg", "credit": "Audubon"}] },
+  "nuttalls-woodpecker": { "commonName": "Nuttall's Woodpecker", "sciName": "Dryobates nuttallii", "photos": [{"label": "Adult", "url": "/bird-photos/nuttalls-woodpecker-adult-male.jpeg", "credit": "Audubon"}] },
   "cactus-wren": { "commonName": "Cactus Wren", "sciName": "Campylorhynchus brunneicapillus", "photos": [] },
   "red-tailed-hawk": { "commonName": "Red-tailed Hawk", "sciName": "Buteo jamaicensis", "photos": [{"label": "Adult", "url": "/bird-photos/red-tailed-hawk-adult.jpeg", "credit": "Audubon"}] },
   "western-bluebird": { "commonName": "Western Bluebird", "sciName": "Sialia mexicana", "photos": [{"label": "Adult", "url": "/bird-photos/western-bluebird-adult-male.jpeg", "credit": "Audubon"}] },
