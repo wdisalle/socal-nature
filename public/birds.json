@@ -36,7 +36,7 @@
   "white-crowned-sparrow": { "commonName": "White-crowned Sparrow", "sciName": "Zonotrichia leucophrys", "photos": [] },
   "northern-harrier": { "commonName": "Northern Harrier", "sciName": "Circus hudsonius", "photos": [] },
   "loggerhead-shrike": { "commonName": "Loggerhead Shrike", "sciName": "Lanius ludovicianus", "photos": [] },
-  "costas-hummingbird": { "commonName": "Costa's Hummingbird", "sciName": "Calypte costae", "photos": [{"label": "Adult", "url": "/bird-photos/costas-hummingbird-adult.jpeg", "credit": "Audubon"}] },
+  "costas-hummingbird": { "commonName": "Costa's Hummingbird", "sciName": "Calypte costae", "photos": [{"label": "Adult", "url": "/bird-photos/costas-hummingbird-adult-male.jpeg", "credit": "Audubon"}] },
   "rufous-crowned-sparrow": { "commonName": "Rufous-crowned Sparrow", "sciName": "Aimophila ruficeps", "photos": [{"label": "Adult", "url": "/bird-photos/rufous-crowned-sparrow-adult.jpeg", "credit": "Audubon"}] },
   "yellow-warbler": { "commonName": "Yellow Warbler", "sciName": "Setophaga petechia", "photos": [] },
   "black-phoebe": { "commonName": "Black Phoebe", "sciName": "Sayornis nigricans", "photos": [{"label": "Adult", "url": "/bird-photos/black-phoebe-adult.jpeg", "credit": "Audubon"}] },
@@ -49,6 +49,6 @@
   "mountain-bluebird": { "commonName": "Mountain Bluebird", "sciName": "Sialia currucoides", "photos": [] },
   "white-headed-woodpecker": { "commonName": "White-headed Woodpecker", "sciName": "Dryobates albolarvatus", "photos": [] },
   "pygmy-nuthatch": { "commonName": "Pygmy Nuthatch", "sciName": "Sitta pygmaea", "photos": [] },
-  "lawrences-goldfinch": { "commonName": "Lawrence's Goldfinch", "sciName": "Spinus lawrencei", "photos": [{"label": "Adult", "url": "/bird-photos/lawrences-goldfinch-adult.jpeg", "credit": "Audubon"}] },
+  "lawrences-goldfinch": { "commonName": "Lawrence's Goldfinch", "sciName": "Spinus lawrencei", "photos": [{"label": "Adult", "url": "/bird-photos/lawrences-goldfinch-adult-male.jpeg", "credit": "Audubon"}] },
   "california-thrasher": { "commonName": "California Thrasher", "sciName": "Toxostoma redivivum", "photos": [{"label": "Adult", "url": "/bird-photos/california-thrasher-adult.jpeg", "credit": "Audubon"}] }
 }
