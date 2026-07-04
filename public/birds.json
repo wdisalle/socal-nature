@@ -21,7 +21,7 @@
   "cactus-wren": { "commonName": "Cactus Wren", "sciName": "Campylorhynchus brunneicapillus", "photos": [] },
   "california-quail": { "commonName": "California Quail", "sciName": "Callipepla californica", "photos": [{"label": "Adult", "url": "/bird-photos/california-quail-adult-male&female.jpeg", "credit": "Audubon"}] },
   "california-gnatcatcher": { "commonName": "California Gnatcatcher", "sciName": "Polioptila californica", "photos": [{"label": "Adult", "url": "/bird-photos/california-gnatcatcher-adult.jpeg", "credit": "Audubon"}] },
-  "california-thrasher": { "commonName": "California Thrasher", "sciName": "Toxostoma redivivum", "photos": [{"label": "Adult", "url": "/bird-photos/california-thrasher-adult.jpeg", "credit": "Audubon"}] }
+  "california-thrasher": { "commonName": "California Thrasher", "sciName": "Toxostoma redivivum", "photos": [{"label": "Adult", "url": "/bird-photos/california-thrasher-adult.jpeg", "credit": "Audubon"}] },
   "california-towhee": { "commonName": "California Towhee", "sciName": "Melozone crissalis", "photos": [{"label": "Adult", "url": "/bird-photos/california-towhee-adult.jpeg", "credit": "Audubon"}] },
   "coopers-hawk": { "commonName": "Cooper's Hawk", "sciName": "Accipiter cooperii", "photos": [{"label": "Adult", "url": "/bird-photos/coopers-hawk-adult.jpeg", "credit": "Audubon"}] },
   "costas-hummingbird": { "commonName": "Costa's Hummingbird", "sciName": "Calypte costae", "photos": [{"label": "Adult", "url": "/bird-photos/costas-hummingbird-adult-male.jpeg", "credit": "Audubon"}] },
@@ -50,6 +50,6 @@
   "white-headed-woodpecker": { "commonName": "White-headed Woodpecker", "sciName": "Dryobates albolarvatus", "photos": [] },
   "white-tailed-kite": { "commonName": "White-tailed Kite", "sciName": "Elanus leucurus", "photos": [{"label": "Adult", "url": "/bird-photos/white-tailed-kite-adult.jpeg", "credit": "Audubon"}] },
   "wrentit": { "commonName": "Wrentit", "sciName": "Chamaea fasciata", "photos": [{"label": "Adult", "url": "/bird-photos/wrentit-adult.jpeg", "credit": "Audubon"}] },
-  "yellow-warbler": { "commonName": "Yellow Warbler", "sciName": "Setophaga petechia", "photos": [] },  
+  "yellow-warbler": { "commonName": "Yellow Warbler", "sciName": "Setophaga petechia", "photos": [] }  
   
 }
